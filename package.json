@@ -6,7 +6,8 @@
   ],
   "dependencies": {
     "apps": "file:packages/apps",
-    "landing": "file:packages/landing"
+    "landing": "file:packages/landing",
+    "landing-jp": "file:packages/landing-jp"
   },
   "devDependencies": {
     "@types/node": "^20",
