@@ -1,6 +1,4 @@
 name: Vercel Main Production Deployment
-env:
-  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 on:
   pull_request:
     types:
@@ -8,19 +6,40 @@ on:
     branches:
       - main
 jobs:
-  echo:
+  deploy-vercel:
+    # IF PR merged
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Deploy to Vercel
       - name: Deploy Apps
         if: contains(github.event.pull_request.labels.*.name, 'deploy-apps')
-        run: echo "Deploying to production"
+        uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
       - name: Deploy Apps-jp
         if: contains(github.event.pull_request.labels.*.name, 'deploy-apps-jp')
-        run: echo "Deploying to production-jp"
+        uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
       - name: Deploy Landing
         if: contains(github.event.pull_request.labels.*.name, 'deploy-landing')
-        run: echo "Deploying to production-landing"
+        uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
       - name: Deploy Landing-jp
         if: contains(github.event.pull_request.labels.*.name, 'deploy-landing-jp')
-        run: echo "Deploying to production-landing-jp"
+        uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
