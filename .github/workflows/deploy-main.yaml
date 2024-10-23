@@ -8,22 +8,19 @@ on:
     branches:
       - main
 jobs:
-  if_merged:
-    # Only run this job if the pull request was merged
+  echo:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: get label
-        id: get_label
-        run: |
-          labels=$(echo "${{ github.event.pull_request.labels.*.name }}")
-          IFS=',' read -ra LABEL_ARRAY <<< "$labels"
-          for label in "${LABEL_ARRAY[@]}"; do
-            echo "label=$label" >> $GITHUB_OUTPUT
-          done
-      - name: echo labels
-        run: |
-          echo "Labels:"
-          for label in ${{ steps.get_label.outputs.label }}; do
-            echo $label
-          done
+      - name: Deploy Apps
+        if: contains(github.event.pull_request.labels.*.name, 'deploy-apps')
+        run: echo "Deploying to production"
+      - name: Deploy Apps-jp
+        if: contains(github.event.pull_request.labels.*.name, 'deploy-apps-jp')
+        run: echo "Deploying to production-jp"
+      - name: Deploy Landing
+        if: contains(github.event.pull_request.labels.*.name, 'deploy-landing')
+        run: echo "Deploying to production-landing"
+      - name: Deploy Landing-jp
+        if: contains(github.event.pull_request.labels.*.name, 'deploy-landing-jp')
+        run: echo "Deploying to production-landing-jp"
