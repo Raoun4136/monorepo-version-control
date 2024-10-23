@@ -1,46 +1,70 @@
 name: Vercel Main Production Deployment
+
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - main
+
 jobs:
-  deploy-vercel:
-    # IF PR merged
-    if: github.event.pull_request.merged == true
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the main branch (always deploy from main after merge)
+      # Checkout the repository
       - name: Checkout main branch
         uses: actions/checkout@v3
         with:
           ref: main
 
-      # Deploy to Vercel
+      # Extract PR number from commit message
+      - name: Extract PR number
+        id: extract_pr_number
+        run: |
+          PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -o -E "#[0-9]+" | tr -d '#')
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+
+      # Get PR labels using GitHub API
+      - name: Get PR Labels
+        id: get_labels
+        run: |
+          if [ -n "${{ env.PR_NUMBER }}" ]; then
+            LABELS=$(gh pr view ${{ env.PR_NUMBER }} --json labels --jq '.labels[].name')
+            echo "PR_LABELS=$LABELS" >> $GITHUB_ENV
+          else
+            echo "No PR number found in commit message."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Deploy Apps if 'deploy-apps' label is present
       - name: Deploy Apps
-        if: contains(github.event.pull_request.labels.*.name, 'deploy-apps')
+        if: contains(env.PR_LABELS, 'deploy-apps')
         uses: amondnet/vercel-action@v25.2.0
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
+
+      # Deploy Apps-jp if 'deploy-apps-jp' label is present
       - name: Deploy Apps-jp
-        if: contains(github.event.pull_request.labels.*.name, 'deploy-apps-jp')
+        if: contains(env.PR_LABELS, 'deploy-apps-jp')
         uses: amondnet/vercel-action@v25.2.0
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
+
+      # Deploy Landing if 'deploy-landing' label is present
       - name: Deploy Landing
-        if: contains(github.event.pull_request.labels.*.name, 'deploy-landing')
+        if: contains(env.PR_LABELS, 'deploy-landing')
         uses: amondnet/vercel-action@v25.2.0
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
+
+      # Deploy Landing-jp if 'deploy-landing-jp' label is present
       - name: Deploy Landing-jp
-        if: contains(github.event.pull_request.labels.*.name, 'deploy-landing-jp')
+        if: contains(env.PR_LABELS, 'deploy-landing-jp')
         uses: amondnet/vercel-action@v25.2.0
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
