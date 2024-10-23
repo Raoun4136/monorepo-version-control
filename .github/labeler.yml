@@ -1,0 +1,34 @@
+# ------------------------------------------------------------
+# WHAT PROJECT TO DEPLOY LABELS
+# ------------------------------------------------------------
+
+# Add 'deploy-apps' label to any changes within the 'packages/apps' directory
+deploy-apps:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/apps/**'
+
+# Add 'deploy-apps-jp' label to any changes within the 'packages/apps' directory
+deploy-apps-jp:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/apps/**'
+
+# Add 'deploy-landing' label to any changes within the 'packages/landing' directory
+deploy-landing:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/landing/**'
+
+# Add 'deploy-landing-jp' label to any changes within the 'packages/landing' directory
+deploy-landing-jp:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/landing-jp/**'
+
+# ------------------------------------------------------------
+# VERSION LABELS
+# ------------------------------------------------------------
+
+# label에 PATCH, MINOR, MAJOR가 없고, 'packages/apps' 디렉토리에 변경사항이 있을 때 PATCH 라벨을 붙인다.
+patch:
+  - labels:
+      - name: 'PATCH'
+    if:
+      - any-glob-to-any-file: 'packages/apps/**'
