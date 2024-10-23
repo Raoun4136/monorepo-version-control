@@ -15,6 +15,11 @@ jobs:
     steps:
       - name: get label
         id: get_label
-        run: echo "::set-output name=label::${{ github.event.pull_request.labels.*.name }}"
+        # github.event.pull_request.labels.*.name will be Array
+        run: echo "label=${{ github.event.pull_request.labels.*.name }}" >> $GITHUB_OUTPUT
       - name: echo label
-        run: echo ${{ steps.get_label.outputs.label }}
+        run: |
+          echo "Labels:"
+          for label in ${{ steps.get_label.outputs.label }}; do
+            echo $label
+          done
