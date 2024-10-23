@@ -11,8 +11,11 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      # Checkout the main branch (always deploy from main after merge)
+      - name: Checkout main branch
         uses: actions/checkout@v3
+        with:
+          ref: main
 
       # Deploy to Vercel
       - name: Deploy Apps
