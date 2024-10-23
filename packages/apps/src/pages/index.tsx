@@ -20,6 +20,7 @@ export default function Home() {
             I want to Deploy to apps&nbsp; I want to echo Label
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
+          이번엔 APPS, APPS_JP 둘다 배포해보자
           <div>
             나는 JP를 에코하고싶다. apps-jp 그럼 이번엔 apps만 배포하기 jp 말고
             <a
