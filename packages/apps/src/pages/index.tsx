@@ -21,7 +21,7 @@ export default function Home() {
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           <div>
-            나는 JP를 에코하고싶다. apps-jp
+            나는 JP를 에코하고싶다. apps-jp 그럼 이번엔 apps만 배포하기 jp 말고
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               target="_blank"
