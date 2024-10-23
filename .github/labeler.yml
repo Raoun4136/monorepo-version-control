@@ -26,9 +26,7 @@ deploy-landing-jp:
 # VERSION LABELS
 # ------------------------------------------------------------
 
-# label에 PATCH, MINOR, MAJOR가 없고, 'packages/apps' 디렉토리에 변경사항이 있을 때 PATCH 라벨을 붙인다.
-patch:
-  - labels:
-      - name: 'PATCH'
-    if:
+# 'packages/apps' 디렉토리에 변경사항이 있을 때 PATCH 라벨을 붙인다.
+PATCH:
+  - changed-files:
       - any-glob-to-any-file: 'packages/apps/**'
