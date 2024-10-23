@@ -1,0 +1,20 @@
+name: Vercel Main Production Deployment
+env:
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+jobs:
+  if_merged:
+    # Only run this job if the pull request was merged
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: get label
+        id: get_label
+        run: echo "::set-output name=label::${{ github.event.pull_request.labels.*.name }}"
+      - name: echo label
+        run: echo ${{ steps.get_label.outputs.label }}
