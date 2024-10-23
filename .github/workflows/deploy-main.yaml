@@ -1,0 +1,29 @@
+name: Vercel Main Production Deployment
+env:
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+jobs:
+  if_merged:
+    # Only run this job if the pull request was merged
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: get label
+        id: get_label
+        run: |
+          labels=$(echo "${{ github.event.pull_request.labels.*.name }}")
+          IFS=',' read -ra LABEL_ARRAY <<< "$labels"
+          for label in "${LABEL_ARRAY[@]}"; do
+            echo "label=$label" >> $GITHUB_OUTPUT
+          done
+      - name: echo labels
+        run: |
+          echo "Labels:"
+          for label in ${{ steps.get_label.outputs.label }}; do
+            echo $label
+          done
