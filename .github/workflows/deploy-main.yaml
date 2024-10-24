@@ -39,67 +39,74 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  test-deploy-apps:
-    runs-on: ubuntu-latest
-    needs: check-pr-labels
-    env:
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install Vercel CLI
-        run: npm install --global vercel@canary
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-
   deploy-apps:
-    #
     # Deploy Apps if 'deploy-apps' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
       - name: Deploy Apps
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps')
-        run: |
-          curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK_APPS }}
+        uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
+          vercel-args: '--prod --confirm'
 
   deploy-apps-jp:
-    #
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
       - name: Deploy Apps-jp
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps-jp')
-        run: |
-          curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK_APPS_JP }}
+        uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
+          vercel-args: '--prod --confirm'
 
   deploy-landing:
-    #
     # Deploy Landing if 'deploy-landing' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
       - name: Deploy Landing
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing')
-        run: |
-          curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK_LANDING }}
+        uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
+          vercel-args: '--prod --confirm'
 
   deploy-landing-jp:
-    #
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
       - name: Deploy Landing-jp
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing-jp')
-        run: |
-          curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK_LANDING_JP }}
+        uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
+          vercel-args: '--prod --confirm'
