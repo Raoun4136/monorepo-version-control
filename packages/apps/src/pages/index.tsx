@@ -42,6 +42,7 @@ export default function Home() {
               />
             </a>
           </div>
+          wfewfewfewf
         </div>
         <div className={styles.center}>
           <Image
