@@ -56,6 +56,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           vercel-args: '--prod --no-wait'
+          vercel-version: '37.12.1'
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
@@ -74,6 +75,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           vercel-args: '--prod --no-wait'
+          vercel-version: '37.12.1'
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present
@@ -92,6 +94,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           vercel-args: '--prod --no-wait'
+          vercel-version: '37.12.1'
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
@@ -110,3 +113,4 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
           vercel-args: '--prod --no-wait'
+          vercel-version: '37.12.1'
