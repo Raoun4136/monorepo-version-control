@@ -44,28 +44,25 @@ jobs:
     runs-on: ubuntu-latest
     needs: check-pr-labels
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v3
-        with:
-          ref: main
+      - uses: actions/checkout@v3
       - name: Deploy Apps
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps')
-        uses: amondnet/vercel-action@v25.2.0
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
-          vercel-args: '--prod'
+        run: |
+          curl -X POST https://api.vercel.com/v13/deployments \
+          -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "name": "apps",
+            "projectId": "'${{ secrets.VERCEL_PROJECT_ID_APPS }}'",
+            "target": "production"
+          }'
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v3
-        with:
-          ref: main
+      - uses: actions/checkout@v3
       - name: Deploy Apps-jp
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps-jp')
         uses: amondnet/vercel-action@v25.2.0
@@ -80,10 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: check-pr-labels
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v3
-        with:
-          ref: main
+      - uses: actions/checkout@v3
       - name: Deploy Landing
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing')
         uses: amondnet/vercel-action@v25.2.0
@@ -98,10 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: check-pr-labels
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v3
-        with:
-          ref: main
+      - uses: actions/checkout@v3
       - name: Deploy Landing-jp
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing-jp')
         uses: amondnet/vercel-action@v25.2.0
