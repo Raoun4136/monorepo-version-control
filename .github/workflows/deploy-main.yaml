@@ -19,15 +19,15 @@ jobs:
       - name: Extract PR number
         id: extract_pr_number
         run: |
-          PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -o -E "#[0-9]+" | tr -d '#')
+          PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -o -E "#[0-9]+" | head -n 1 | tr -d '#')
           echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
 
-      # Get PR labels using GitHub API
+      # Get PR labels using GitHub API and sanitize the output
       - name: Get PR Labels
         id: get_labels
         run: |
           if [ -n "${{ env.PR_NUMBER }}" ]; then
-            LABELS=$(gh pr view ${{ env.PR_NUMBER }} --json labels --jq '.labels[].name')
+            LABELS=$(gh pr view ${{ env.PR_NUMBER }} --json labels --jq '.labels[].name' | tr '\n' ',' | sed 's/,$//')
             echo "PR_LABELS=$LABELS" >> $GITHUB_ENV
           else
             echo "No PR number found in commit message."
