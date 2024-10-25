@@ -21,12 +21,3 @@ deploy-landing:
 deploy-landing-jp:
   - changed-files:
       - any-glob-to-any-file: 'packages/landing-jp/**'
-
-# ------------------------------------------------------------
-# VERSION LABELS
-# ------------------------------------------------------------
-
-# 'packages/apps' 디렉토리에 변경사항이 있을 때 PATCH 라벨을 붙인다.
-PATCH:
-  - changed-files:
-      - any-glob-to-any-file: 'packages/apps/**'
