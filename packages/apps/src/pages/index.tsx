@@ -31,7 +31,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              wefwefwef{' '}
+              wefwefwef wefewfwef
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
