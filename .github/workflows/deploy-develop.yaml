@@ -42,7 +42,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-apps
+          GITHUB_DEPLOYMENT_ENV: Development – monorepo-version-control-apps
           ALIAS_DOMAINS: dev-monorepo-version-control-apps.vercel.app
 
   deploy-apps-jp:
@@ -63,7 +63,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-apps-jp
+          GITHUB_DEPLOYMENT_ENV: Development – monorepo-version-control-apps-jp
           ALIAS_DOMAINS: dev-monorepo-version-control-apps-jp.vercel.app
 
   deploy-landing:
@@ -84,7 +84,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-landing
+          GITHUB_DEPLOYMENT_ENV: Development – monorepo-version-control-landing
           ALIAS_DOMAINS: dev-monorepo-version-control-landing.vercel.app
 
   deploy-landing-jp:
@@ -105,5 +105,5 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-landing-jp
+          GITHUB_DEPLOYMENT_ENV: Development – monorepo-version-control-landing-jp
           ALIAS_DOMAINS: dev-monorepo-version-control-landing-jp.vercel.app

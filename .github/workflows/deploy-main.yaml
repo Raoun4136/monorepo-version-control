@@ -57,7 +57,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps
+          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-apps
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
 
@@ -79,7 +79,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps-jp
+          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-apps-jp
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
             VERCEL_PUBLIC_API_URL=yamlwins
@@ -102,7 +102,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-landing
+          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-landing
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
@@ -122,4 +122,4 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-landing-jp
+          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-landing-jp
