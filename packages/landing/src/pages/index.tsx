@@ -16,16 +16,7 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
-          요기두!!sdfdsfdsdddf
-          <p>
-            I want to Deploy to Landing&nbsp;qwewqe
-            <code className={styles.code}>src/pages/index.tsx</code>
-          </p>
-          CHANGE ALL
-          <p>{process.env.NODE_ENV}</p>
-          <p>{process.env.NEXT_PUBLIC_API_URL}</p>
-          <p>{process.env.VERCEL_PUBLIC_API_URL}</p>
-          one more commit
+          요기두!!sdfdsfdsdddf 나는야 랜딩ㄴㅇㄹ
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
