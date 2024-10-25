@@ -1,4 +1,4 @@
-name: Labeler for Pull Requests to Main, Release Branches
+name: Labeler for Pull Requests
 on:
   pull_request:
     types: [opened, synchronize, reopened]

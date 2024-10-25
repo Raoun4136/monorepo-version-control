@@ -1,4 +1,4 @@
-name: Vercel Main Staging Deployment
+name: Vercel Staging Deployment
 
 on:
   push:
