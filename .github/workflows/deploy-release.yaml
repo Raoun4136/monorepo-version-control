@@ -43,6 +43,7 @@ jobs:
     # Deploy Apps if 'deploy-apps' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps')
     environment: Staging – monorepo-version-control-apps
     steps:
       - name: Checkout release branch
@@ -50,7 +51,6 @@ jobs:
         with:
           ref: release
       - name: Deploy Apps
-        if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps')
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -58,13 +58,14 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Staging – monorepo-version-control-apps
+          GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: stg-monorepo-version-control-apps.vercel.app
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps-jp')
     environment: Staging – monorepo-version-control-apps-jp
     steps:
       - name: Checkout release branch
@@ -72,7 +73,6 @@ jobs:
         with:
           ref: release
       - name: Deploy Apps-jp
-        if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps-jp')
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -80,31 +80,31 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Staging – monorepo-version-control-apps-jp
+          GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: stg-monorepo-version-control-apps-jp.vercel.app
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing')
     steps:
       - name: Checkout release branch
         uses: actions/checkout@v4
         with:
           ref: release
       - name: Deploy Landing
-        if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing')
         run: echo "Deploy Landing-jp"
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing-jp')
     steps:
       - name: Checkout release branch
         uses: actions/checkout@v4
         with:
           ref: release
       - name: Deploy Landing-jp
-        if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing-jp')
         run: echo "Deploy Landing-jp"

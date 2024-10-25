@@ -43,6 +43,7 @@ jobs:
     # Deploy Apps if 'deploy-apps' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps')
     environment: Production – monorepo-version-control-apps
     steps:
       - name: Checkout main branch
@@ -50,7 +51,6 @@ jobs:
         with:
           ref: main
       - name: Deploy Apps
-        if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps')
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -58,7 +58,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-apps
+          GITHUB_DEPLOYMENT: false
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
 
@@ -66,6 +66,7 @@ jobs:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps-jp')
     environment: Production – monorepo-version-control-apps-jp
     steps:
       - name: Checkout main branch
@@ -73,7 +74,6 @@ jobs:
         with:
           ref: main
       - name: Deploy Apps-jp
-        if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps-jp')
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -81,7 +81,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-apps-jp
+          GITHUB_DEPLOYMENT: false
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
             VERCEL_PUBLIC_API_URL=yamlwins
@@ -90,6 +90,7 @@ jobs:
     # Deploy Landing if 'deploy-landing' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing')
     environment: Production – monorepo-version-control-landing
     steps:
       - name: Checkout main branch
@@ -97,7 +98,6 @@ jobs:
         with:
           ref: main
       - name: Deploy Landing
-        if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing')
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -105,12 +105,13 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-landing
+          GITHUB_DEPLOYMENT: false
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing-jp')
     environment: Production – monorepo-version-control-landing-jp
     steps:
       - name: Checkout main branch
@@ -118,7 +119,6 @@ jobs:
         with:
           ref: main
       - name: Deploy Landing-jp
-        if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing-jp')
         uses: BetaHuhn/deploy-to-vercel-action@latest
         with:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -126,4 +126,4 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-landing-jp
+          GITHUB_DEPLOYMENT: false
