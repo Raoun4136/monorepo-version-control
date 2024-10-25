@@ -1,0 +1,21 @@
+name: Vercel Main Development Deployment
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  # 그 전 배포에서 변경된 파일을 확인하는 작업
+  check-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Check Diff
+        id: check_diff
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} > $GITHUB_ENV/CHANGED_FILES
+          cat $GITHUB_ENV/CHANGED_FILES

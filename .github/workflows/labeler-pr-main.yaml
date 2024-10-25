@@ -1,9 +1,10 @@
-name: Labeler for Pull Requests to Main
+name: Labeler for Pull Requests to Main, Release Branches
 on:
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
       - main
+      - release
 
 jobs:
   labeler:
