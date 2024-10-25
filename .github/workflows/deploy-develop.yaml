@@ -20,7 +20,8 @@ jobs:
       - name: Check Diff
         id: check_diff
         run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | tr '\n' ',')
+          CHANGED_FILES=${CHANGED_FILES%,} # 마지막 쉼표 제거
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_OUTPUT
           echo "CHANGED_FILES=$CHANGED_FILES"
 
