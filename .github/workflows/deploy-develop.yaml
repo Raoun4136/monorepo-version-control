@@ -9,13 +9,101 @@ jobs:
   # 그 전 배포에서 변경된 파일을 확인하는 작업
   check-diff:
     runs-on: ubuntu-latest
+    outputs:
+      CHANGED_FILES: ${{ steps.check_diff.outputs.CHANGED_FILES }}
     steps:
       - name: Checkout develop branch
         uses: actions/checkout@v3
         with:
           ref: develop
+          fetch-depth: 0 # fetch all history
       - name: Check Diff
         id: check_diff
         run: |
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }} > $GITHUB_ENV/CHANGED_FILES
-          cat $GITHUB_ENV/CHANGED_FILES
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_OUTPUT
+          echo "CHANGED_FILES=$CHANGED_FILES"
+
+  deploy-apps:
+    # 'deploy-apps' 라벨이 존재하면 앱을 배포합니다.
+    runs-on: ubuntu-latest
+    needs: check-diff
+    steps:
+      - name: Checkout develop branch
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+      - name: Deploy Apps
+        if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/apps/')
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRODUCTION: false
+          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-apps
+          ALIAS_DOMAINS: dev-monorepo-version-control-apps.vercel.app
+
+  deploy-apps-jp:
+    # 'deploy-apps-jp' 라벨이 존재하면 앱-jp를 배포합니다.
+    runs-on: ubuntu-latest
+    needs: check-diff
+    steps:
+      - name: Checkout develop branch
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+      - name: Deploy Apps-jp
+        if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/apps-jp/')
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRODUCTION: false
+          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-apps-jp
+          ALIAS_DOMAINS: dev-monorepo-version-control-apps-jp.vercel.app
+
+  deploy-landing:
+    # 'deploy-landing' 라벨이 존재하면 랜딩을 배포합니다.
+    runs-on: ubuntu-latest
+    needs: check-diff
+    steps:
+      - name: Checkout develop branch
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+      - name: Deploy Landing
+        if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/landing/')
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRODUCTION: false
+          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-landing
+          ALIAS_DOMAINS: dev-monorepo-version-control-landing.vercel.app
+
+  deploy-landing-jp:
+    # 'deploy-landing-jp' 라벨이 존재하면 랜딩-jp를 배포합니다.
+    runs-on: ubuntu-latest
+    needs: check-diff
+    steps:
+      - name: Checkout develop branch
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+      - name: Deploy Landing-jp
+        if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/landing-jp/')
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRODUCTION: false
+          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-landing-jp
+          ALIAS_DOMAINS: dev-monorepo-version-control-landing-jp.vercel.app
