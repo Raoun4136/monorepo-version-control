@@ -57,6 +57,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
+          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps deployments
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
@@ -76,6 +77,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
+          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps-jp deployments
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present
@@ -95,7 +97,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Development
+          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-landing deployments
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
@@ -115,3 +117,4 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
+          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-landing-jp deployments
