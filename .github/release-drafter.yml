@@ -1,0 +1,84 @@
+name-template: '$RESOLVED_VERSION'
+tag-template: '$RESOLVED_VERSION'
+commitish: 'main'
+categories:
+  - title: '변경된 기능'
+    labels:
+      - '✨'
+      - '💄'
+      - '🎨'
+      - '🔊'
+      - '🌐'
+      - '✅'
+  - title: '수정 버그 내역'
+    labels:
+      - '🐛'
+      - '🚑️'
+  - title: '기타'
+    labels:
+      - '📝'
+      - '💩'
+      - '🔥'
+      - '🚚'
+      - '📦'
+autolabeler:
+  - label: '🎨'
+    title:
+      - '/🎨/'
+  - label: '⚡️'
+    title:
+      - '/⚡️/'
+  - label: '✨'
+    title:
+      - '/✨/'
+  - label: '🐛'
+    title:
+      - '/🐛/'
+  - label: '🚑️'
+    title:
+      - '/🚑️/'
+      - '/🚑/' # :ambulance:가 이상할 떄도 있음
+  - label: '🔊'
+    title:
+      - '/🔊/'
+  - label: '💄'
+    title:
+      - '/💄/'
+  - label: '🌐'
+    title:
+      - '/🌐/'
+  - label: '📝'
+    title:
+      - '/📝/'
+  - label: '✅'
+    title:
+      - '/✅/'
+  - label: '💩'
+    title:
+      - '/💩/'
+  - label: '🔥'
+    title:
+      - '/🔥/'
+  - label: '🚚'
+    title:
+      - '/🚚/'
+  - label: '📦'
+    title:
+      - '/📦/'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
+version-resolver:
+  major:
+    labels:
+      - 'MAJOR'
+  minor:
+    labels:
+      - 'MINOR'
+  patch:
+    labels:
+      - 'PATCH'
+  default: patch
+template: |
+  ## 변경내역
+
+  $CHANGES
