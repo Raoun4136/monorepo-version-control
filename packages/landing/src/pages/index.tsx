@@ -21,7 +21,7 @@ export default function Home() {
             I want to Deploy to Landing&nbsp;qwewqe
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
-          DEPOLOY DEPLOYDEPLOY
+          CHANGE ALL
           <p>{process.env.NODE_ENV}</p>
           <p>{process.env.NEXT_PUBLIC_API_URL}</p>
           <p>{process.env.VERCEL_PUBLIC_API_URL}</p>

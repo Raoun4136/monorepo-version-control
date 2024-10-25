@@ -17,7 +17,7 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <p>
-            I want to Deploy to Landingqewqewe JP&nbsp;
+            CHANGE ALL
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           <p>{process.env.NODE_ENV}</p>
