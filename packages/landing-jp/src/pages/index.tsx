@@ -18,7 +18,7 @@ export default function Home() {
         <div className={styles.description}>
           wfwefewf
           <p>
-            CHANGE ALLfdwef
+            ㅈㄹㅈㄷㄹ CHANGE ALLfdwef
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           <p>{process.env.NODE_ENV}</p>
