@@ -22,7 +22,7 @@ export default function Home() {
             I want to Deploy to apps&nbsp; I want to echo Label
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
-          이번엔 APPS, APPS_JP 둘다 배포해보자 develop에선 요기가 ㅋㅋ
+          이번엔 APPS, APPS_JP 둘다 배포해보자 develop에선 요기가 ㅋㅋsfdsf
           <div>
             그럼 이건 어떨까? 나는 JP를 에코하고싶다. apps-jqqqp 그럼 이번엔 apps만
             배포하기 jp 말고wfewf
