@@ -17,7 +17,7 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         이번엔 apps만 할겁니다~ ㄴㅇㄹwfewfwefwfwefeewfㅠㅠㅠ
         <div className={styles.description}>
-          qeqweqwe ewfwefw 이건 되겠지?wefwefefwfwefewfwfeqwdqwewefwefw
+          qeqweqwe ewfwefw 이건 되겠지?wefwefefwfwefewfwfeqwdqwewefwefwdsfewf
           <p>
             I want to Deploy to apps&nbsp; I want to echo Label
             <code className={styles.code}>src/pages/index.tsx</code>
