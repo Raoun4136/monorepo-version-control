@@ -58,7 +58,7 @@ jobs:
         with:
           ref: develop
       - name: Deploy Apps-jp
-        if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/apps-jp/')
+        if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/apps/')
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
