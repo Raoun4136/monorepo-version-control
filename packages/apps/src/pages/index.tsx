@@ -26,6 +26,7 @@ export default function Home() {
           <div>CHANGE ALL I WANT TO PR</div>
           wfewfewfewf
         </div>
+        wfwefe
         <div className={styles.center}>
           <Image
             className={styles.logo}
