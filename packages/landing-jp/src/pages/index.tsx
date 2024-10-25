@@ -17,7 +17,7 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <p>
-            I want to Deploy to Landing JP&nbsp;
+            I want to Deploy to Landingqewqewe JP&nbsp;
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           <div>
