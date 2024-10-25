@@ -23,30 +23,10 @@ export default function Home() {
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           이번엔 APPS, APPS_JP 둘다 배포해보자 develop에선 요기가 ㅋㅋsfdsf
-          <div>
-            CHANGE ALL
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              wefwefwef wefewfwefgdsqwe
-              <p>{process.env.NODE_ENV}</p>
-              <p>{process.env.NEXT_PUBLIC_API_URL}</p>
-              <p>{process.env.VERCEL_PUBLIC_API_URL}</p>
-              one more commit
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
+          <div>CHANGE ALL I WANT TO PR</div>
           wfewfewfewf
         </div>
+        wfwefe
         <div className={styles.center}>
           <Image
             className={styles.logo}
