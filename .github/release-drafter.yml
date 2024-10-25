@@ -5,66 +5,101 @@ categories:
   - title: '변경된 기능'
     labels:
       - '✨'
+      - ':sparkles:'
       - '💄'
+      - ':lipstick:'
       - '🎨'
+      - ':art:'
+      - '⚡️'
+      - ':zap:'
       - '🔊'
+      - ':loud_sound:'
       - '🌐'
+      - ':globe_with_meridians:'
       - '✅'
+      - ':white_check_mark:'
   - title: '수정 버그 내역'
     labels:
       - '🐛'
+      - ':bug:'
       - '🚑️'
+      - ':ambulance:'
   - title: '기타'
     labels:
       - '📝'
+      - ':memo:'
       - '💩'
+      - ':poop:'
       - '🔥'
+      - ':fire:'
       - '🚚'
+      - ':truck:'
       - '📦'
+      - ':package:'
+      - '👷'
+      - ':construction_worker:'
 autolabeler:
-  - label: '🎨'
+  - label: ':art:'
     title:
       - '/🎨/'
-  - label: '⚡️'
+      - '/:art:/'
+  - label: ':zap:'
     title:
       - '/⚡️/'
-  - label: '✨'
+      - '/:zap:/'
+  - label: ':sparkles:'
     title:
       - '/✨/'
-  - label: '🐛'
+      - '/:sparkles:/'
+  - label: ':bug:'
     title:
       - '/🐛/'
-  - label: '🚑️'
+      - '/:bug:/'
+  - label: ':ambulance:'
     title:
       - '/🚑️/'
-      - '/🚑/' # :ambulance:가 이상할 떄도 있음
-  - label: '🔊'
+      - '/🚑/' # :ambulance: 가 이상하게 잡힐 때도 있음
+      - '/:ambulance:/'
+  - label: ':loud_sound:'
     title:
       - '/🔊/'
-  - label: '💄'
+      - '/:loud_sound:/'
+  - label: ':lipstick:'
     title:
+      - '/:lipstick:/'
       - '/💄/'
   - label: '🌐'
     title:
       - '/🌐/'
+      - '/:globe_with_meridians:/'
   - label: '📝'
     title:
       - '/📝/'
+      - '/:memo:/'
   - label: '✅'
     title:
       - '/✅/'
+      - '/:white_check_mark:/'
   - label: '💩'
     title:
       - '/💩/'
+      - '/:poop:/'
   - label: '🔥'
     title:
       - '/🔥/'
+      - '/:fire:/'
   - label: '🚚'
     title:
       - '/🚚/'
+      - '/:truck:/'
   - label: '📦'
     title:
       - '/📦/'
+      - '/:package:/'
+  - label: ':construction_worker:'
+    title:
+      - '/👷/'
+      - '/:construction_worker:/'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 version-resolver:
