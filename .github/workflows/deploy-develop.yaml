@@ -13,7 +13,7 @@ jobs:
       CHANGED_FILES: ${{ steps.check_diff.outputs.CHANGED_FILES }}
     steps:
       - name: Checkout develop branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: develop
           fetch-depth: 0 # fetch all history
@@ -28,9 +28,10 @@ jobs:
     # 'deploy-apps' 라벨이 존재하면 앱을 배포합니다.
     runs-on: ubuntu-latest
     needs: check-diff
+    environment: Development – monorepo-version-control-apps
     steps:
       - name: Checkout develop branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: develop
       - name: Deploy Apps
@@ -42,16 +43,17 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-apps
+          GITHUB_DEPLOYMENT_ENV: Development – monorepo-version-control-apps
           ALIAS_DOMAINS: dev-monorepo-version-control-apps.vercel.app
 
   deploy-apps-jp:
     # 'deploy-apps-jp' 라벨이 존재하면 앱-jp를 배포합니다.
     runs-on: ubuntu-latest
     needs: check-diff
+    environment: Development – monorepo-version-control-apps-jp
     steps:
       - name: Checkout develop branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: develop
       - name: Deploy Apps-jp
@@ -63,16 +65,17 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-apps-jp
+          GITHUB_DEPLOYMENT_ENV: Development – monorepo-version-control-apps-jp
           ALIAS_DOMAINS: dev-monorepo-version-control-apps-jp.vercel.app
 
   deploy-landing:
     # 'deploy-landing' 라벨이 존재하면 랜딩을 배포합니다.
     runs-on: ubuntu-latest
     needs: check-diff
+    environment: Development – monorepo-version-control-landing
     steps:
       - name: Checkout develop branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: develop
       - name: Deploy Landing
@@ -84,16 +87,17 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-landing
+          GITHUB_DEPLOYMENT_ENV: Development – monorepo-version-control-landing
           ALIAS_DOMAINS: dev-monorepo-version-control-landing.vercel.app
 
   deploy-landing-jp:
     # 'deploy-landing-jp' 라벨이 존재하면 랜딩-jp를 배포합니다.
     runs-on: ubuntu-latest
     needs: check-diff
+    environment: Development – monorepo-version-control-landing-jp
     steps:
       - name: Checkout develop branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: develop
       - name: Deploy Landing-jp
@@ -105,5 +109,5 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Development - monorepo-version-control-landing-jp
+          GITHUB_DEPLOYMENT_ENV: Development – monorepo-version-control-landing-jp
           ALIAS_DOMAINS: dev-monorepo-version-control-landing-jp.vercel.app

@@ -1,4 +1,4 @@
-name: Vercel Main Staging Deployment
+name: Vercel Staging Deployment
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout release branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: release
       # Extract PR number from commit message
@@ -43,9 +43,10 @@ jobs:
     # Deploy Apps if 'deploy-apps' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Staging – monorepo-version-control-apps
     steps:
       - name: Checkout release branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: release
       - name: Deploy Apps
@@ -57,16 +58,17 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Staging - monorepo-version-control-apps
+          GITHUB_DEPLOYMENT_ENV: Staging – monorepo-version-control-apps
           ALIAS_DOMAINS: stg-monorepo-version-control-apps.vercel.app
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Staging – monorepo-version-control-apps-jp
     steps:
       - name: Checkout release branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: release
       - name: Deploy Apps-jp
@@ -78,7 +80,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
-          GITHUB_DEPLOYMENT_ENV: Staging - monorepo-version-control-apps-jp
+          GITHUB_DEPLOYMENT_ENV: Staging – monorepo-version-control-apps-jp
           ALIAS_DOMAINS: stg-monorepo-version-control-apps-jp.vercel.app
 
   deploy-landing:
@@ -87,7 +89,7 @@ jobs:
     needs: check-pr-labels
     steps:
       - name: Checkout release branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: release
       - name: Deploy Landing
@@ -100,7 +102,7 @@ jobs:
     needs: check-pr-labels
     steps:
       - name: Checkout release branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: release
       - name: Deploy Landing-jp

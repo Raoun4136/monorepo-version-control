@@ -13,9 +13,9 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          ref: main
+          ref: main # 이거 ref.main이 아니라 COMMIT으로 바꿔야 deployment에 잘 들어갈듯?
       # Extract PR number from commit message
       - name: Extract PR number
         id: extract_pr_number
@@ -43,9 +43,10 @@ jobs:
     # Deploy Apps if 'deploy-apps' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Production – monorepo-version-control-apps
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Deploy Apps
@@ -57,15 +58,18 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps
+          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-apps
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Production – monorepo-version-control-apps-jp
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Deploy Apps-jp
@@ -77,15 +81,19 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps-jp
+          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-apps-jp
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
+            VERCEL_PUBLIC_API_URL=yamlwins
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Production – monorepo-version-control-landing
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Deploy Landing
@@ -97,15 +105,16 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-landing
+          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-landing
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Production – monorepo-version-control-landing-jp
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Deploy Landing-jp
@@ -117,4 +126,4 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
-          GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-landing-jp
+          GITHUB_DEPLOYMENT_ENV: Production – monorepo-version-control-landing-jp

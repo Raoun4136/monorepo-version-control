@@ -22,6 +22,10 @@ export default function Home() {
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           DEPOLOY DEPLOYDEPLOY
+          <p>{process.env.NODE_ENV}</p>
+          <p>{process.env.NEXT_PUBLIC_API_URL}</p>
+          <p>{process.env.VERCEL_PUBLIC_API_URL}</p>
+          one more commit
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
