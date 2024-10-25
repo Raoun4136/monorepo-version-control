@@ -50,13 +50,12 @@ jobs:
           ref: main
       - name: Deploy Apps
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps')
-        uses: amondnet/vercel-action@v25.2.0
+        uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
-          vercel-args: '--prod --no-wait'
-          vercel-version: '37.12.1'
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
+          PRODUCTION: true
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
@@ -69,13 +68,12 @@ jobs:
           ref: main
       - name: Deploy Apps-jp
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-apps-jp')
-        uses: amondnet/vercel-action@v25.2.0
+        uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
-          vercel-args: '--prod --no-wait'
-          vercel-version: '37.12.1'
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
+          PRODUCTION: true
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present
@@ -88,13 +86,12 @@ jobs:
           ref: main
       - name: Deploy Landing
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing')
-        uses: amondnet/vercel-action@v25.2.0
+        uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
-          vercel-args: '--prod --no-wait'
-          vercel-version: '37.12.1'
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
+          PRODUCTION: true
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
@@ -107,10 +104,9 @@ jobs:
           ref: main
       - name: Deploy Landing-jp
         if: contains(needs.check-pr-labels.outputs.PR_LABELS, 'deploy-landing-jp')
-        uses: amondnet/vercel-action@v25.2.0
+        uses: BetaHuhn/deploy-to-vercel-action@latest
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
-          vercel-args: '--prod --no-wait'
-          vercel-version: '37.12.1'
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
+          PRODUCTION: true
