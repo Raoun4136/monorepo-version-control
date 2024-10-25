@@ -95,6 +95,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
+          GITHUB_DEPLOYMENT_ENV: Development
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
