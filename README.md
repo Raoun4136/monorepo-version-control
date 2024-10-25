@@ -61,19 +61,16 @@ Lerna + Vercel CLI + Github Actions를 이용한 Monorepo 배포, 버전관리
     - **Development** - apps, apps-jp, landing, landing-jp
 - [ ] **버전관리** (App Only)
   - [ ] `PATCH`, `MINOR`, `MAJOR` Label을 PR에 올릴 시 [Release Drafter](https://github.com/marketplace/actions/release-drafter)를 통해 버전을 관리한다.
-  - [ ] Release에 PR을 올릴 시, 변경된 커밋의 Title을 PR의 body에 자동으로 추가한다.
-  - [ ] Main(Master)에 PR을 올릴 시, Release된 버전의 커밋과 비교하여 변경된 커밋의 Title을 PR의 body에 자동으로 추가한다.
-    - Landing, Landing-jp만 배포했을 때, Commit들이 Release Note에서 유실되는 문제가 있을 것 같다.
-    - 그래도 괜찮다면, Main(Master)도 변경된 커밋의 Title만을 PR의 body에 추가한다.
-  - [ ] Main(Master)에 Merge시, PR의 body내용을 Release Note에 추가한다.
-    - [ ] 이 때, Release Note는 커밋의 내용을 기반으로 템플릿에 맞춰 작성한다.
-- [ ] 각 배포 후 **Slack 알림**을 보낸다.
-  - [ ] 배포된 링크와 changelog(PR, commit)등을 포함한다.
+  - [ ] Release에 PR을 올릴 시, 변경된 커밋의 Title을 PR의 body에 자동으로 추가한다. (slack 배포알림을 위함)
+    - [ ] release note를 위해 PR의 commit title을 확인 후 label을 붙인다.
+  - [ ] Main(Master)에 PR을 올릴 시, Release된 버전의 커밋과 비교하여 변경된 커밋의 Title을 PR의 body에 자동으로 추가한다. (slack 배포알림을 위함)
+    - Main(Master)에 변경된 커밋의 Title만을 PR의 body에 추가한다면, Landing, Landing-jp만 배포했을 때, Commit들이 유실되는 문제가 있을 것 같다. (생각 필요)
+  - [ ] Main(Master)에 Merge시, Release Drafter를 통해 버전을 관리한다.
+- [ ] **Slack 알림**을 보낸다.
+  - [ ] 각 배포 후, 배포된 링크와 changelog(PR, commit)등을 포함한다.
 
 ## 추가 요구사항
 
-- 메인 배포는 각각 화,목에 진행하고 hotfix들은 버전을 올리지 않고 뒤에 난수를 붙여 배포한다.
-  - hotfix 배포 시 : ex. 1.0.0 -> 1.0.0-aweff -> 1.0.0-wefqd
 - 티켓(Jira-1242) 브랜치는 feature/\*, fix/\*, refactor/\* ... 등으로 관리한다.
 - 배포하여 생긴 changelog들을 모아서 release note를 작성한다.
   - 이때 release note는 수동으로 변경할 수 있다.
