@@ -22,16 +22,15 @@ export default function Home() {
             I want to Deploy to apps&nbsp; I want to echo Label
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
-          이번엔 APPS, APPS_JP 둘다 배포해보자
+          이번엔 APPS, APPS_JP 둘다 배포해보자 develop에선 요기가 ㅋㅋsfdsf
           <div>
-            그럼 이건 어떨까? 나는 JP를 에코하고싶다. apps-jqqqp 그럼 이번엔 apps만
-            배포하기 jp 말고wfewf
+            CHANGE ALL
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               target="_blank"
               rel="noopener noreferrer"
             >
-              wefwefwef wefewfwef
+              wefwefwef wefewfwefgdsqwe
               <p>{process.env.NODE_ENV}</p>
               <p>{process.env.NEXT_PUBLIC_API_URL}</p>
               <p>{process.env.VERCEL_PUBLIC_API_URL}</p>
