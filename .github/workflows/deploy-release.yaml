@@ -43,6 +43,7 @@ jobs:
     # Deploy Apps if 'deploy-apps' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Staging – monorepo-version-control-apps
     steps:
       - name: Checkout release branch
         uses: actions/checkout@v4
@@ -64,6 +65,7 @@ jobs:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Staging – monorepo-version-control-apps-jp
     steps:
       - name: Checkout release branch
         uses: actions/checkout@v4

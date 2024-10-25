@@ -43,6 +43,7 @@ jobs:
     # Deploy Apps if 'deploy-apps' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Production – monorepo-version-control-apps
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v4
@@ -65,6 +66,7 @@ jobs:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Production – monorepo-version-control-apps-jp
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v4
@@ -88,6 +90,7 @@ jobs:
     # Deploy Landing if 'deploy-landing' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Production – monorepo-version-control-landing
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v4
@@ -108,6 +111,7 @@ jobs:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
     runs-on: ubuntu-latest
     needs: check-pr-labels
+    environment: Production – monorepo-version-control-landing-jp
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v4
