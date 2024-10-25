@@ -13,9 +13,9 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          ref: main
+          ref: main # 이거 ref.main이 아니라 COMMIT으로 바꿔야 deployment에 잘 들어갈듯?
       # Extract PR number from commit message
       - name: Extract PR number
         id: extract_pr_number
@@ -45,7 +45,7 @@ jobs:
     needs: check-pr-labels
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Deploy Apps
@@ -58,6 +58,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.API_KEY }}
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
@@ -65,7 +68,7 @@ jobs:
     needs: check-pr-labels
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Deploy Apps-jp
@@ -85,7 +88,7 @@ jobs:
     needs: check-pr-labels
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Deploy Landing
@@ -105,7 +108,7 @@ jobs:
     needs: check-pr-labels
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Deploy Landing-jp
