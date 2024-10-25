@@ -60,7 +60,6 @@ jobs:
           GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
-            NEXT_PUBLIC_API_KEY=${{ secrets.API_KEY }}
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
@@ -81,6 +80,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT_ENV: Production - monorepo-version-control-apps-jp
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
+            VERCEL_PUBLIC_API_URL=yamlwins
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present
