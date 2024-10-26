@@ -92,7 +92,7 @@ jobs:
           ref: develop
       - name: Load Environment Variables from JSON
         run: |
-          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]'
+          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]')
           echo "BUILD_ENV<<EOF" >> $GITHUB_ENV
           echo "${BUILD_ENV}" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
