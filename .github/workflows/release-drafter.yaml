@@ -4,9 +4,6 @@ on:
   push:
     branches: 'main'
   pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - release
 
 permissions:
   contents: read
@@ -19,5 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v6
+        with:
+          commitish: 'main'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
