@@ -99,8 +99,14 @@ autolabeler:
     title:
       - '/👷/'
       - '/:construction_worker:/'
-change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
-change-title-escapes: '\<*_&' # 지라 티켓 번호가 들어가면 링크로 변환해주기
+  - label: 'skip-changelog'
+    branch:
+      - 'main' # 메인 브랜치에 PR 시, 변경내역에 포함하지 않는다.
+change-template: '- $TITLE (#$NUMBER)'
+change-title-escapes: '\<*_&'
+replacers:
+  - search: '\[(\b[A-Z]{2,}-\d+)\]'
+    replace: '[[$1]](https://your-jira-domain.atlassian.net/browse/$1)' # 지라 링크로 변경
 exclude-labels:
   - 'skip-changelog' # 변경내역에 포함하지 않을 라벨
 version-resolver:
