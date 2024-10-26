@@ -90,12 +90,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: develop
-      - name: Load Environment Variables from JSON
-        run: |
-          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]')
-          echo "BUILD_ENV<<EOF" >> $GITHUB_ENV
-          echo "${BUILD_ENV}" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+      # - name: Load Environment Variables from JSON
+      #   run: |
+      #     BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]')
+      #     echo "BUILD_ENV<<EOF" >> $GITHUB_ENV
+      #     echo "${BUILD_ENV}" >> $GITHUB_ENV
+      #     echo "EOF" >> $GITHUB_ENV
       - name: Deploy Landing
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
@@ -106,7 +106,13 @@ jobs:
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: dev-monorepo-version-control-landing.vercel.app
-          BUILD_ENV: ${{ env.BUILD_ENV }}
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL="${{ secrets.NEXT_PUBLIC_API_URL }}"
+            NEXT_PUBLIC_API_KEY="${{ secrets.NEXT_PUBLIC_API_KEY }}"
+            MY_ENV="${{ secrets.MY_ENV }}"
+            MORE_ENV="${{ secrets.MORE_ENV }}"
+            LOCALE_ENV="${{ secrets.LOCALE_ENV }}"
+            LANDING_ENV="${{ secrets.LANDING_ENV }}"
 
   deploy-landing-jp:
     # 'deploy-landing-jp' 라벨이 존재하면 랜딩-jp를 배포합니다.
