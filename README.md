@@ -63,7 +63,7 @@ Lerna + Vercel CLI + Github Actions를 이용한 Monorepo 배포, 버전관리
   - [x] `PATCH`, `MINOR`, `MAJOR` Label을 PR에 올릴 시 [Release Drafter](https://github.com/marketplace/actions/release-drafter)를 통해 버전을 관리한다.
   - [x] Release Note에 지라티켓이 붙어있다면, 해당 티켓을 링크한다.
   - [x] 모든 PR에 기능 Label을 붙인다. (Release Note 반영을 위해)
-    - [x] main 브랜치에 PR을 올릴 때는 `skip-changelog` Label을 붙인다. (Release Note에 반영하지 않음)
+    - [ ] main 브랜치에 PR을 올릴 때는 `skip-changelog` Label을 붙인다. (Release Note에 반영하지 않음)
   - [ ] Release에 PR을 올릴 시,
     - [ ] 변경된 커밋의 Title을 PR의 body에 자동으로 추가한다. (slack 배포알림을 위함)
     - [x] drafter 초안을 작성한다.
