@@ -98,6 +98,8 @@ vercel-action이나 deploy-to-vercel에서 Github Deployments Environment를 생
 
 > 따라서 각 환경변수를 github deployments에 설정해주고, github actions를 통해 vercel build를 기다리는 방식으로 해결하였다.
 
+---
+
 ### 각 브랜치의 사용성
 
 **MAIN BRANCH**
@@ -124,6 +126,8 @@ Develop 브랜치가 너무 뒤죽박죽이라서, release 브랜치를 배포�
 
 그래서 develop은 PR의 라벨링으로 배포하는 것이 아닌, git diff를 통해 변경된 파일을 확인하여 배포하는 방식으로 변경하였다.
 
+---
+
 ### `Release Drafter` 의 사용성
 
 Commit 단위가 아닌 PR로 Release Note를 작성해야겠다고 생각했다.
@@ -138,11 +142,15 @@ Release 브랜치에 merge가 되었을 때는 Release Draft를 작성하고, Ma
 
 추가로, Release Draft에 Jira 티켓이 붙어있다면, 해당 티켓을 링크하도록 설정하였다.
 
+---
+
 ### `Release Drafter` Default 설정
 
 자꾸 develop 브랜치에 release-drafter.yml를 업데이트해놓고 왜 안되지..? 라는 생각을 했는데, release-drafter는 default branch 기준으로 release-drafter.yml를 찾는 것이였다.
 
 > 따라서, main(master) 브랜치에 release-drafter.yml을 최신화 해야한다.
+
+---
 
 ### `deploy-to-vercel` BUILD_ENV
 
@@ -151,6 +159,8 @@ Release 브랜치에 merge가 되었을 때는 Release Draft를 작성하고, Ma
 [참고 링크](https://github.com/Raoun4136/monorepo-version-control/actions/runs/11531539772/job/32102352795)
 
 > env를 설정하려면 직접 ${{ secrets.ENV }}로 설정해야한다.
+
+---
 
 ### AutoLabel Annotation for `Release Drafter`
 
