@@ -67,31 +67,31 @@ autolabeler:
     title:
       - '/:lipstick:/'
       - '/💄/'
-  - label: '🌐'
+  - label: ':globe_with_meridians:'
     title:
       - '/🌐/'
       - '/:globe_with_meridians:/'
-  - label: '📝'
+  - label: ':memo:'
     title:
       - '/📝/'
       - '/:memo:/'
-  - label: '✅'
+  - label: ':white_check_mark:'
     title:
       - '/✅/'
       - '/:white_check_mark:/'
-  - label: '💩'
+  - label: ':poop:'
     title:
       - '/💩/'
       - '/:poop:/'
-  - label: '🔥'
+  - label: ':fire:'
     title:
       - '/🔥/'
       - '/:fire:/'
-  - label: '🚚'
+  - label: ':truck:'
     title:
       - '/🚚/'
       - '/:truck:/'
-  - label: '📦'
+  - label: ':package:'
     title:
       - '/📦/'
       - '/:package:/'
@@ -102,8 +102,8 @@ autolabeler:
 change-template: '- $TITLE (#$NUMBER)'
 change-title-escapes: '\<*_&'
 replacers:
-  - search: '/\b([A-Z]+)-(\d+)\b/g'
-    replace: '[[$$1-$$2]](https://your-jira-domain.atlassian.net/browse/$$1-$$2)' # 지라 링크로 변경
+  - search: '\[([A-Z]+)-(\d+)\]'
+    replace: '[[$1-$2]](https://your-jira-domain.atlassian.net/browse/$1-$2)' # 지라 링크로 변경
 exclude-labels:
   - 'skip-changelog' # 변경내역에 포함하지 않을 라벨
 version-resolver:
