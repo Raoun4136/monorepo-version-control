@@ -54,8 +54,8 @@ Lerna + Vercel CLI + Github Actions를 이용한 Monorepo 배포, 버전관리
   - [x] **develop** 브랜치는 개발 배포한다.
     - [x] develop 브랜치는 push시 `git diff`를 통해 변경된 파일을 확인하여 배포한다.
       - Diff Files: `apps`(app + app-jp), `landing`, `landing-jp`
-- [ ] 각 배포 환경 별로 **환경변수**를 관리한다.
-  - [ ] github deployments의 environment를 이용하여 환경변수를 설정한다.
+- [x] 각 배포 환경 별로 **환경변수**를 관리한다.
+  - [x] github deployments의 environment를 이용하여 환경변수를 설정한다.
     - **Production** - apps, apps-jp, landing, landing-jp
     - **Staging** - apps, apps-jp
     - **Development** - apps, apps-jp, landing, landing-jp
