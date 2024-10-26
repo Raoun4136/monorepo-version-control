@@ -52,7 +52,7 @@ jobs:
           ref: main
       - name: Load Environment Variables from JSON
         run: |
-          BUILD_ENV=$(cat env.apps.json | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]')
+          BUILD_ENV=$(cat env.apps.json | jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]'
           echo "BUILD_ENV=${BUILD_ENV}" >> $GITHUB_ENV
       - name: Deploy Apps
         uses: BetaHuhn/deploy-to-vercel-action@v1
@@ -78,7 +78,7 @@ jobs:
           ref: main
       - name: Load Environment Variables from JSON
         run: |
-          BUILD_ENV=$(cat env.apps.json | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]')
+          BUILD_ENV=$(cat env.apps.json | jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]'
           echo "BUILD_ENV=${BUILD_ENV}" >> $GITHUB_ENV
       - name: Deploy Apps-jp
         uses: BetaHuhn/deploy-to-vercel-action@v1
@@ -104,7 +104,7 @@ jobs:
           ref: main
       - name: Load Environment Variables from JSON
         run: |
-          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]')
+          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]'
           echo "BUILD_ENV=${BUILD_ENV}" >> $GITHUB_ENV
       - name: Deploy Landing
         uses: BetaHuhn/deploy-to-vercel-action@v1
@@ -130,7 +130,7 @@ jobs:
           ref: main
       - name: Load Environment Variables from JSON
         run: |
-          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]')
+          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]'
           echo "BUILD_ENV=${BUILD_ENV}" >> $GITHUB_ENV
       - name: Deploy Landing-jp
         uses: BetaHuhn/deploy-to-vercel-action@latest
