@@ -60,6 +60,9 @@ jobs:
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: stg-monorepo-version-control-apps.vercel.app
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
@@ -82,6 +85,9 @@ jobs:
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: stg-monorepo-version-control-apps-jp.vercel.app
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present

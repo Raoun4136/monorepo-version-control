@@ -46,6 +46,9 @@ jobs:
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: dev-monorepo-version-control-apps.vercel.app
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
 
   deploy-apps-jp:
     # 'deploy-apps-jp' 라벨이 존재하면 앱-jp를 배포합니다.
@@ -68,6 +71,9 @@ jobs:
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: dev-monorepo-version-control-apps-jp.vercel.app
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
 
   deploy-landing:
     # 'deploy-landing' 라벨이 존재하면 랜딩을 배포합니다.
@@ -90,6 +96,9 @@ jobs:
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: dev-monorepo-version-control-landing.vercel.app
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
 
   deploy-landing-jp:
     # 'deploy-landing-jp' 라벨이 존재하면 랜딩-jp를 배포합니다.
@@ -112,3 +121,6 @@ jobs:
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
           ALIAS_DOMAINS: dev-monorepo-version-control-landing-jp.vercel.app
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
