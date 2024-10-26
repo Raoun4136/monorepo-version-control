@@ -120,10 +120,7 @@ version-resolver:
     labels:
       - 'PATCH'
   default: patch
-no-changes-template: |
-  ## 변경내역
-
-  이번 릴리즈에는 변경된 내역이 없습니다. 🎉
+no-changes-template: 이번 릴리즈에는 변경된 내역이 없습니다. 🎉
 template: |
   ## 변경내역
 
