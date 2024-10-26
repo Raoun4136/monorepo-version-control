@@ -17,10 +17,6 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <p>NEXT_PUBLIC_API_URL: {process.env.NEXT_PUBLIC_API_URL}</p>
         <p>NEXT_PUBLIC_API_KEY: {process.env.NEXT_PUBLIC_API_KEY}</p>
-        <p>MY_ENV: {process.env.MY_ENV}</p>
-        <p>MORE_ENV: {process.env.MORE_ENV}</p>
-        <p>LOCALE_ENV: {process.env.LOCALE_ENV}</p>
-        <p>LANDING_ENV: {process.env.LANDING_ENV}</p>
       </main>
     </>
   );
