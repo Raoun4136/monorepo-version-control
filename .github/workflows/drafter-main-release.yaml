@@ -1,0 +1,25 @@
+# Main Branch에 push가 발생하면 Release를 바로 Publish
+name: Main Release drafter
+
+on:
+  push:
+    branches:
+      - 'main'
+
+permissions:
+  contents: read
+
+jobs:
+  update_release_draft:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        with:
+          commitish: 'main'
+          publish: true
+          config-name: '.github/release-drafter.yml'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

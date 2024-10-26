@@ -1,6 +1,5 @@
 name-template: '$RESOLVED_VERSION'
 tag-template: '$RESOLVED_VERSION'
-commitish: 'main'
 categories:
   - title: '변경된 기능'
     labels:
@@ -101,7 +100,9 @@ autolabeler:
       - '/👷/'
       - '/:construction_worker:/'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
-change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
+change-title-escapes: '\<*_&' # 지라 티켓 번호가 들어가면 링크로 변환해주기
+exclude-labels:
+  - 'skip-changelog' # 변경내역에 포함하지 않을 라벨
 version-resolver:
   major:
     labels:
