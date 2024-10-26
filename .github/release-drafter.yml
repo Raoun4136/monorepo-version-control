@@ -1,5 +1,6 @@
 name-template: '$RESOLVED_VERSION'
 tag-template: '$RESOLVED_VERSION'
+commitish: 'main'
 categories:
   - title: '변경된 기능'
     labels:
@@ -99,14 +100,11 @@ autolabeler:
     title:
       - '/👷/'
       - '/:construction_worker:/'
-  - label: 'skip-changelog'
-    branch:
-      - '/main/' # 메인 브랜치에 PR 시, 변경내역에 포함하지 않는다.
 change-template: '- $TITLE (#$NUMBER)'
 change-title-escapes: '\<*_&'
 replacers:
-  - search: '\\[(\\b[A-Z]{2,}-\\d+)\\]'
-    replace: '[[$1]](https://your-jira-domain.atlassian.net/browse/$1)' # 지라 링크로 변경
+  - search: '/\[*JIRA-(\d+)\]*\s*-*\s*/g'
+    replace: '[[JIRA-$1]](https://your-jira-domain.atlassian.net/browse/JIRA-$1)' # 지라 링크로 변경
 exclude-labels:
   - 'skip-changelog' # 변경내역에 포함하지 않을 라벨
 version-resolver:
