@@ -60,7 +60,8 @@ jobs:
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
           BUILD_ENV: |
-            NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
@@ -83,8 +84,8 @@ jobs:
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
           BUILD_ENV: |
-            NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
-            VERCEL_PUBLIC_API_URL=yamlwins
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present
@@ -106,6 +107,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
@@ -127,3 +131,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
+          BUILD_ENV: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
