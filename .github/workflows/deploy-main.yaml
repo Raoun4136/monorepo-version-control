@@ -50,6 +50,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+      - name: Load Environment Variables from JSON
+        run: |
+          BUILD_ENV=$(cat env.apps.json | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]')
+          echo "BUILD_ENV=${BUILD_ENV}" >> $GITHUB_ENV
       - name: Deploy Apps
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
@@ -59,8 +63,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
-          BUILD_ENV: |
-            NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
+          BUILD_ENV: ${{ env.BUILD_ENV }}
 
   deploy-apps-jp:
     # Deploy Apps-jp if 'deploy-apps-jp' label is present
@@ -73,6 +76,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+      - name: Load Environment Variables from JSON
+        run: |
+          BUILD_ENV=$(cat env.apps.json | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]')
+          echo "BUILD_ENV=${BUILD_ENV}" >> $GITHUB_ENV
       - name: Deploy Apps-jp
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
@@ -82,9 +89,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
-          BUILD_ENV: |
-            NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
-            VERCEL_PUBLIC_API_URL=yamlwins
+          BUILD_ENV: ${{ env.BUILD_ENV }}
 
   deploy-landing:
     # Deploy Landing if 'deploy-landing' label is present
@@ -97,6 +102,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+      - name: Load Environment Variables from JSON
+        run: |
+          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]')
+          echo "BUILD_ENV=${BUILD_ENV}" >> $GITHUB_ENV
       - name: Deploy Landing
         uses: BetaHuhn/deploy-to-vercel-action@v1
         with:
@@ -106,6 +115,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
+          BUILD_ENV: ${{ env.BUILD_ENV }}
 
   deploy-landing-jp:
     # Deploy Landing-jp if 'deploy-landing-jp' label is present
@@ -118,6 +128,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+      - name: Load Environment Variables from JSON
+        run: |
+          BUILD_ENV=$(cat env.landing.json | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]')
+          echo "BUILD_ENV=${BUILD_ENV}" >> $GITHUB_ENV
       - name: Deploy Landing-jp
         uses: BetaHuhn/deploy-to-vercel-action@latest
         with:
@@ -127,3 +141,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT: false
+          BUILD_ENV: ${{ env.BUILD_ENV }}
