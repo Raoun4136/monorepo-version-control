@@ -79,3 +79,15 @@ Lerna + Vercel CLI + Github Actions를 이용한 Monorepo 배포, 버전관리
 - 배포하여 생긴 changelog들을 모아서 release note를 작성한다.
   - Jira Release와 연동한다.
   - Zapier와 연동하여 ChatGPT를 통해 release note를 작성하고 Notion에 저장한다.
+
+## 트러블 슈팅
+
+### Release Drafter Default 설정
+
+release-drafter는 default branch 기준으로 release-drafter.yml를 찾는다.
+따라서, main(master) 브랜치에 release-drafter.yml을 추가해야한다.
+
+### deploy-to-vercel BUILD_ENV
+
+env를 설정하려면 직접 ${{ secrets.ENV }}로 설정해야한다.
+json파일로 관리해서 불러와 jq로 파싱하는 방법을 시도해봤지만, 문자열로 인식하여 사용할 수 없었다.
