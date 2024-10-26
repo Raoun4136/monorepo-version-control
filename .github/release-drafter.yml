@@ -101,7 +101,7 @@ autolabeler:
       - '/:construction_worker:/'
   - label: 'skip-changelog'
     branch:
-      - 'main' # 메인 브랜치에 PR 시, 변경내역에 포함하지 않는다.
+      - '/main/' # 메인 브랜치에 PR 시, 변경내역에 포함하지 않는다.
 change-template: '- $TITLE (#$NUMBER)'
 change-title-escapes: '\<*_&'
 replacers:
