@@ -15,7 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        이번엔 apps만 할겁니다~ ㄴㅇㄹwfewfwefwfwefeewfㅠㅠㅠ
+        이번엔 apps만 할겁니다~ ㄴㅇㄹwfewfwefwfwefeewfㅠㅠㅠ 이거를
         <div className={styles.description}>
           qeqweqwe ewfwefw 이건 되겠지?wefwefefwfwefewfwfeqwdqwewefwefwdsfewf
           <p>
