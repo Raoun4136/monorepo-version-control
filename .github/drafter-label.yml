@@ -60,3 +60,7 @@ autolabeler:
     title:
       - '/👷/'
       - '/:construction_worker:/'
+template: |
+  ## 변경내역
+
+  $CHANGES
