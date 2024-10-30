@@ -58,7 +58,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_DEPLOYMENT: false
-          PRODUCTION: false
+          PRODUCTION: true
           ALIAS_DOMAINS: monorepo-version-control-apps.vercel.app
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -84,7 +84,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_APPS_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_DEPLOYMENT: false
-          PRODUCTION: false
+          PRODUCTION: true
           ALIAS_DOMAINS: monorepo-version-control-apps-jp.vercel.app
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -110,7 +110,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_DEPLOYMENT: false
-          PRODUCTION: false
+          PRODUCTION: true
           ALIAS_DOMAINS: monorepo-version-control-landing.vercel.app
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -136,7 +136,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_LANDING_JP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_DEPLOYMENT: false
-          PRODUCTION: false
+          PRODUCTION: true
           ALIAS_DOMAINS: monorepo-version-control-landing-jp.vercel.app
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
