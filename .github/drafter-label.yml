@@ -1,0 +1,62 @@
+autolabeler:
+  - label: ':art:'
+    title:
+      - '/🎨/'
+      - '/:art:/'
+  - label: ':zap:'
+    title:
+      - '/⚡️/'
+      - '/:zap:/'
+  - label: ':sparkles:'
+    title:
+      - '/✨/'
+      - '/:sparkles:/'
+  - label: ':bug:'
+    title:
+      - '/🐛/'
+      - '/:bug:/'
+  - label: ':ambulance:'
+    title:
+      - '/🚑️/'
+      - '/🚑/' # :ambulance: 가 이상하게 잡힐 때도 있음
+      - '/:ambulance:/'
+  - label: ':loud_sound:'
+    title:
+      - '/🔊/'
+      - '/:loud_sound:/'
+  - label: ':lipstick:'
+    title:
+      - '/:lipstick:/'
+      - '/💄/'
+  - label: ':globe_with_meridians:'
+    title:
+      - '/🌐/'
+      - '/:globe_with_meridians:/'
+  - label: ':memo:'
+    title:
+      - '/📝/'
+      - '/:memo:/'
+  - label: ':white_check_mark:'
+    title:
+      - '/✅/'
+      - '/:white_check_mark:/'
+  - label: ':poop:'
+    title:
+      - '/💩/'
+      - '/:poop:/'
+  - label: ':fire:'
+    title:
+      - '/🔥/'
+      - '/:fire:/'
+  - label: ':truck:'
+    title:
+      - '/🚚/'
+      - '/:truck:/'
+  - label: ':package:'
+    title:
+      - '/📦/'
+      - '/:package:/'
+  - label: ':construction_worker:'
+    title:
+      - '/👷/'
+      - '/:construction_worker:/'

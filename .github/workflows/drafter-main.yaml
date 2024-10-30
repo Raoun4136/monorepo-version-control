@@ -1,0 +1,48 @@
+# Main Branch에 push가 발생하면 Release를 바로 Publish
+name: Main Release drafter
+
+on:
+  pull_request:
+    branches: ['main']
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  publish_release:
+    if: github.event.pull_request.merged == true && (contains(github.event.pull_request.labels.*.name, 'deploy-apps') || contains(github.event.pull_request.labels.*.name, 'deploy-apps-jp'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        with:
+          config-name: 'drafter-main.yml'
+          publish: true
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # 버전명을 추출한다.
+      - name: Extract version name from the latest tag
+        run: |
+          TAG_NAME=$(git describe --tags --abbrev=0)
+          echo "TAG_VERSION=${TAG_NAME}" >> $GITHUB_ENV
+        id: extract_version_name
+      # Jira Release를 생성한다.
+      - name: Jira Release
+        id: release
+        run: |
+          echo "Jira Release"
+          echo ${{ env.TAG_VERSION }}
+
+  update_release_draft:
+    if: github.event.pull_request.merged == true && !(contains(github.event.pull_request.labels.*.name, 'deploy-apps') || contains(github.event.pull_request.labels.*.name, 'deploy-apps-jp'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        with:
+          config-name: 'drafter-main.yml'

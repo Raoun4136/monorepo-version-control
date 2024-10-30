@@ -3,17 +3,20 @@ name: Labeling for Release Drafter
 
 on:
   pull_request:
+    types: [opened]
 
 permissions:
   contents: write
   pull-requests: write
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   label_release_draft:
+    if: github.event.pull_request.base.ref != 'develop'
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v6
         with:
-          config-name: 'release-drafter.yml'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          config-name: 'drafter-label.yml'
