@@ -2,19 +2,22 @@
 name: Release Drafter
 
 on:
-  push:
-    branches: 'release'
+  pull_request:
+    branches: ['release']
+    types: [closed]
 
 permissions:
   contents: write
   pull-requests: write
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   update_release_draft:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v6
         with:
-          config-name: 'release-drafter.yml'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          config-name: 'drafter-release.yml'
