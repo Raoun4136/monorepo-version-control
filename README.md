@@ -104,27 +104,21 @@ vercel-action이나 deploy-to-vercel에서 Github Deployments Environment를 생
 
 **MAIN BRANCH**
 
-상용 서버의 브랜치이다.
-
-모노레포 특성상 각 패키지별로 배포를 구분해야하는데, 기존에는 Branch로 구분했으나, 코드 통합이 어려워졌다.
-
-따라서 main branch에 PR을 올리면, label을 통해 배포를 구분하였다.
+- 상용 서버의 브랜치이다.
+- 모노레포 특성상 각 패키지별로 배포를 구분해야하는데, 기존에는 Branch로 구분했으나, 코드 통합이 어려워졌다.
+- 따라서 main branch에 PR을 올리면, label을 통해 배포를 구분하였다.
 
 **RELEASE BRANCH**
 
-새로 만들 Staging 서버의 브랜치이다.
-
-상용 서버의 브랜치와 같은 방식으로 PR을 올리면, label을 통해 배포를 구분하였다.
-
-Develop 브랜치가 너무 뒤죽박죽이라서, release 브랜치를 배포전 테스트용으로 사용하였다.
+- 새로 만들 Staging 서버의 브랜치이다.
+- 상용 서버의 브랜치와 같은 방식으로 PR을 올리면, label을 통해 배포를 구분하였다.
+- Develop 브랜치가 너무 뒤죽박죽이라서, release 브랜치를 배포전 테스트용으로 사용하였다.
 
 **DEVELOP BRANCH**
 
-개발 단계에서는 develop 브랜치를 완전히 틀에 맞춰 사용하지 않았다.
-
-예를 들어 develop에 PR을 올리는 것이 아닌, 그냥 push하기도 하고 다른 개발자들의 코드가 뒤죽박죽 섞여있는 사용성이였다.
-
-그래서 develop은 PR의 라벨링으로 배포하는 것이 아닌, git diff를 통해 변경된 파일을 확인하여 배포하는 방식으로 변경하였다.
+- 개발 단계에서는 develop 브랜치를 완전히 틀에 맞춰 사용하지 않았다.
+- 예를 들어 develop에 PR을 올리는 것이 아닌, 그냥 push하기도 하고 다른 개발자들의 코드가 뒤죽박죽 섞여있는 사용성이였다.
+- 그래서 develop은 PR의 라벨링으로 배포하는 것이 아닌, git diff를 통해 변경된 파일을 확인하여 배포하는 방식으로 변경하였다.
 
 ---
 
@@ -197,3 +191,38 @@ HttpError: Validation Failed: {"resource":"Release","code":"invalid","field":"ta
   - 분리하게 되면 관리포인트가 늘어나므로, 관리하기 어려워진다.
 
 > 현재는 Annotations만 나오므로 무시하고 진행하기로 결정하였다.
+
+---
+
+### Custom Domain for Vercel
+
+Vercel이 Git을 연결하지 않으면, Custom Domain들을 모두다 Production으로 설정되게끔 되어있다.
+따라서, Production(main, master)를 배포하면, 모든 Custom Domain이 Production으로 바뀌게 된다.
+
+이를 해결하기 위해, 몇가지 방법을 실행해봤는데,
+
+- Vercel CLI로 Custom Domain을 설정해준다.
+  - 이 방법은 실패했다. 왜냐면 Vercel CLI로 Custom Domain을 연결해주려면 이미 Vercel에서 도메인을 연결시켜놔야하는데, 그 도메인은 Production 레벨로 설정되어있기 때문이고,
+  - Vercel CLI Deploy --prod를 하게 된다면, Production으로 설정되어있는 도메인이 또다시 덮어씌워지게 되는 문제점이 있다.
+- main, develop, staging 전부다 Preview로 배포한다.
+  - 작동은 했다만, 이 방법은 Vercel에서 Production을 Tracking하기가 어렵고, 만약 Production 배포 시 웹훅을 연결해야한다면 그건 나름대로 어려움이 있다.
+
+따라서, Vercel에 Git을 연결하되, Automatic Git Integration을 끄고, Github Actions를 통해 배포하는 방법을 검증해야했다.
+
+---
+
+## 10/30 요구사항
+
+- [ ] Git과 Vercel은 연결된 채로 사용한다.
+  - [ ] Git Actions를 통해 배포한다.
+  - [ ] Vercel 자동배포는 사용하지 않는다.
+- [ ] DataDog을 이용하여 모니터링한다
+  - [ ] Rum, Log를 프로젝트에 연결하여, Vercel_ENV가 아닌 직접 설정된 NODE_ENV를 사용한다.
+- [ ] 각 PR이 올라왔을 때 slack으로 알림을 보낸다.
+  - [ ] PR이 올라왔을 때, Body에 변경된 커밋의 Title을 추가한다.
+  - [ ] 만약 ambulance면, 긴급배포 요청 slack 알림을 보낸다.
+  - [ ] 만약 `code-review` label이 붙어있다면, PR을 리뷰해야한다는 slack 알림을 보낸다.
+    - [ ] Reviewer가 없다면, Reviewer를 지정해준다.
+- [ ] Releases 가 발행되면, Jira Release와 연동한다.
+  - [ ] Jira Release가 없다면, 새로 생성하고, 아니라면 기존 Release에 추가한다.
+  - [ ] Jira Release가 발행되면, Slack 알림을 보내고, Zapier로 Notion에 저장한다.
