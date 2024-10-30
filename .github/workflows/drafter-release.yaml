@@ -20,4 +20,4 @@ jobs:
     steps:
       - uses: release-drafter/release-drafter@v6
         with:
-          config-name: 'drafter-release.yml'
+          config-name: 'release-drafter.yml'
