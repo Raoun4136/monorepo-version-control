@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: release-drafter/release-drafter@v6
         with:
-          config-name: 'drafter-main.yml'
+          config-name: 'release-drafter.yml'
           publish: true
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -45,4 +45,4 @@ jobs:
     steps:
       - uses: release-drafter/release-drafter@v6
         with:
-          config-name: 'drafter-main.yml'
+          config-name: 'release-drafter.yml'
