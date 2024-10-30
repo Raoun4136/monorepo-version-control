@@ -1,36 +1,24 @@
 name: Vercel Development Deployment
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - develop
 
-jobs:
-  # 그 전 배포에서 변경된 파일을 확인하는 작업
-  check-diff:
-    runs-on: ubuntu-latest
-    outputs:
-      CHANGED_FILES: ${{ steps.check_diff.outputs.CHANGED_FILES }}
-    steps:
-      - name: Checkout develop branch
-        uses: actions/checkout@v4
-        with:
-          ref: develop
-          fetch-depth: 0 # fetch all history
-      - name: Check Diff
-        id: check_diff
-        run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | tr '\n' ',')
-          CHANGED_FILES=${CHANGED_FILES%,} # 마지막 쉼표 제거
-          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_OUTPUT
-          echo "CHANGED_FILES=$CHANGED_FILES"
+permissions:
+  contents: write
+  pull-requests: write
 
+jobs:
   deploy-apps:
-    # 'deploy-apps' 라벨이 존재하면 앱을 배포합니다.
+    # PR이 Merge 되고, deploy-app 라벨이 붙어있을 때만 동작한다.
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'deploy-app')
     runs-on: ubuntu-latest
-    needs: check-diff
-    if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/apps/')
     environment: Development – monorepo-version-control-apps
+    env:
+      ALIAS_DOMAINS: dev-monorepo-version-control-apps.vercel.app
     steps:
       - name: Checkout develop branch
         uses: actions/checkout@v4
@@ -45,18 +33,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
-          ALIAS_DOMAINS: dev-monorepo-version-control-apps.vercel.app
+          ALIAS_DOMAINS: ${{ env.ALIAS_DOMAINS }}
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
             NEXT_PUBLIC_NODE_ENV=${{ secrets.NEXT_PUBLIC_NODE_ENV }}
 
   deploy-apps-jp:
-    # 'deploy-apps-jp' 라벨이 존재하면 앱-jp를 배포합니다.
+    # PR이 Merge 되고, deploy-app-jp 라벨이 붙어있을 때만 동작한다.
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'deploy-app-jp')
     runs-on: ubuntu-latest
-    needs: check-diff
-    if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/apps/')
     environment: Development – monorepo-version-control-apps-jp
+    env:
+      ALIAS_DOMAINS: dev-monorepo-version-control-apps-jp.vercel.app
     steps:
       - name: Checkout develop branch
         uses: actions/checkout@v4
@@ -71,18 +60,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
-          ALIAS_DOMAINS: dev-monorepo-version-control-apps-jp.vercel.app
+          ALIAS_DOMAINS: ${{ env.ALIAS_DOMAINS }}
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
             NEXT_PUBLIC_NODE_ENV=${{ secrets.NEXT_PUBLIC_NODE_ENV }}
 
   deploy-landing:
-    # 'deploy-landing' 라벨이 존재하면 랜딩을 배포합니다.
+    # PR이 Merge 되고, deploy-landing 라벨이 붙어있을 때만 동작한다.
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'deploy-landing')
     runs-on: ubuntu-latest
-    needs: check-diff
-    if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/landing/')
     environment: Development – monorepo-version-control-landing
+    env:
+      ALIAS_DOMAINS: dev-monorepo-version-control-landing.vercel.app
     steps:
       - name: Checkout develop branch
         uses: actions/checkout@v4
@@ -97,18 +87,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
-          ALIAS_DOMAINS: dev-monorepo-version-control-landing.vercel.app
+          ALIAS_DOMAINS: ${{ env.ALIAS_DOMAINS }}
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
             NEXT_PUBLIC_NODE_ENV=${{ secrets.NEXT_PUBLIC_NODE_ENV }}
 
   deploy-landing-jp:
-    # 'deploy-landing-jp' 라벨이 존재하면 랜딩-jp를 배포합니다.
+    # PR이 Merge 되고, deploy-landing-jp 라벨이 붙어있을 때만 동작한다.
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'deploy-landing-jp')
     runs-on: ubuntu-latest
-    needs: check-diff
-    if: contains(needs.check-diff.outputs.CHANGED_FILES, 'packages/landing-jp/')
     environment: Development – monorepo-version-control-landing-jp
+    env:
+      ALIAS_DOMAINS: dev-monorepo-version-control-landing-jp.vercel.app
     steps:
       - name: Checkout develop branch
         uses: actions/checkout@v4
@@ -123,7 +114,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRODUCTION: false
           GITHUB_DEPLOYMENT: false
-          ALIAS_DOMAINS: dev-monorepo-version-control-landing-jp.vercel.app
+          ALIAS_DOMAINS: ${{ env.ALIAS_DOMAINS }}
           BUILD_ENV: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
