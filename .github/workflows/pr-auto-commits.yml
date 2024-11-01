@@ -18,20 +18,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Get list of commits
-        id: get_commits
+      - name: Write Commits to PR body
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Merge로 시작되지 않고 PR에 포함된 커밋 메세지를 가져옵니다.
-          MESSAGES=$(gh pr view ${{ github.event.pull_request.number }} --json commits --jq '.commits[] | select(.messageHeadline | startswith("Merge") | not) | .messageHeadline')
-          echo "MESSAGES=$MESSAGES" >> $GITHUB_ENV
-          echo "MESSAGES=$MESSAGES"
-      - name: Write Commits to PR body
-        id: write_commits
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+          MESSAGES=$(gh pr view ${{ github.event.pull_request.number }} --jq '.commits[] | select(.messageHeadline | startswith("Merge") | not) | .messageHeadline')
+
           # 기존 PR body를 가져온다.
           PR_BODY=$(gh pr view ${{ github.event.pull_request.number }} --json body --jq '.body')
 
