@@ -11,7 +11,7 @@ jobs:
     outputs:
       PR_LABELS: ${{ steps.get_labels.outputs.PR_LABELS }}
     steps:
-      # Checkout the repository
+      # Checkout the repository main
       - name: Checkout main branch
         uses: actions/checkout@v4
         with:
