@@ -1,10 +1,11 @@
 name: Labeler for Pull Requests
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened]
     branches:
       - main
       - release
+      - develop
 
 jobs:
   labeler:
@@ -17,4 +18,3 @@ jobs:
         uses: actions/labeler@v5
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          sync-labels: true

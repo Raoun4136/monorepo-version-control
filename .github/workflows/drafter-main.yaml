@@ -15,7 +15,7 @@ env:
 
 jobs:
   publish_release:
-    if: github.event.pull_request.merged == true && (contains(github.event.pull_request.labels.*.name, 'deploy-apps') || contains(github.event.pull_request.labels.*.name, 'deploy-apps-jp'))
+    if: github.event.pull_request.merged == true && (contains(github.event.pull_request.labels.*.name, 'deploy-apps') || contains(github.event.pull_request.labels.*.name, 'deploy-jp-apps'))
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v6
@@ -40,7 +40,7 @@ jobs:
           echo ${{ env.TAG_VERSION }}
 
   update_release_draft:
-    if: github.event.pull_request.merged == true && !(contains(github.event.pull_request.labels.*.name, 'deploy-apps') || contains(github.event.pull_request.labels.*.name, 'deploy-apps-jp'))
+    if: github.event.pull_request.merged == true && !(contains(github.event.pull_request.labels.*.name, 'deploy-apps') || contains(github.event.pull_request.labels.*.name, 'deploy-jp-apps'))
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v6
