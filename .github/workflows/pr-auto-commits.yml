@@ -17,25 +17,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Get list of commits
-        id: get_commits
+      - name: Write Commits to PR body
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Merge로 시작되지 않고 PR에 포함된 커밋 메세지를 가져옵니다.
-          MESSAGES=$(gh pr view ${{ github.event.pull_request.number }} --jq '.commits[] | select(.messageHeadline | startswith("Merge") | not) | .messageHeadline')
-          echo "MESSAGES=$MESSAGES" >> $GITHUB_ENV
-          echo "MESSAGES=$MESSAGES"
-      - name: Write Commits to PR body
-        id: write_commits
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+          MESSAGES=$(gh pr view ${{ github.event.pull_request.number }} --json commits --jq '.commits[] | select(.messageHeadline | startswith("Merge") | not) | "- \(.messageHeadline)"' | sed 's/$/\\n/g' | tr -d '\n')
+
           # 기존 PR body를 가져온다.
-          PR_BODY=$(gh pr view ${{ github.event.pull_request.number }} --jq '.body')
+          PR_BODY=$(gh pr view ${{ github.event.pull_request.number }} --json body --jq '.body')
 
           # "📝 Changes on this Pull Request" 라인 아래에 커밋 제목을 추가한다.
-          UPDATED_PR_BODY=$(echo "$PR_BODY" | sed "/📝 Changes on this Pull Request/a\\$MESSAGES")
+          UPDATED_PR_BODY=$(echo "$PR_BODY" | sed "/📝 Changes on this Pull Request/a\\\\n$MESSAGES")
 
           # 본문 업데이트
           gh pr edit ${{ github.event.pull_request.number }} --body "$UPDATED_PR_BODY"
