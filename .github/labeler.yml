@@ -7,8 +7,8 @@ deploy-apps:
   - changed-files:
       - any-glob-to-any-file: 'packages/apps/**'
 
-# Add 'deploy-apps-jp' label to any changes within the 'packages/apps' directory
-deploy-apps-jp:
+# Add 'deploy-jp-apps' label to any changes within the 'packages/apps' directory
+deploy-jp-apps:
   - changed-files:
       - any-glob-to-any-file: 'packages/apps/**'
 
@@ -17,7 +17,7 @@ deploy-landing:
   - changed-files:
       - any-glob-to-any-file: 'packages/landing/**'
 
-# Add 'deploy-landing-jp' label to any changes within the 'packages/landing' directory
-deploy-landing-jp:
+# Add 'deploy-jp-landing' label to any changes within the 'packages/landing' directory
+deploy-jp-landing:
   - changed-files:
       - any-glob-to-any-file: 'packages/landing-jp/**'

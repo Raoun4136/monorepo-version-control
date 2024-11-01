@@ -87,11 +87,11 @@ autolabeler:
 change-template: '- $TITLE (#$NUMBER)'
 change-title-escapes: '\<*_&'
 replacers:
-  - search: '\[([A-Z]+)-(\d+)\]'
-    replace: '[[$1-$2]](https://your-jira-domain.atlassian.net/browse/$1-$2)' # 지라 링크로 변경
+  - search: '/\[JIRA-(\d+)\]\s*-*\s*/g'
+    replace: '[[JIRA-$1]](https://my-domain.atlassian.net/browse/JIRA-$1) '
 exclude-labels:
   - 'skip-changelog' # 변경내역에 포함하지 않을 라벨
-include-labelse:
+include-labels:
   - ':sparkles:'
   - ':lipstick:'
   - ':art:'
@@ -120,6 +120,4 @@ version-resolver:
   default: patch
 no-changes-template: 이번 릴리즈에는 변경된 내역이 없습니다. 🎉
 template: |
-  ## 변경내역
-
   $CHANGES
