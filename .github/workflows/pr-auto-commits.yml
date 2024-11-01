@@ -6,6 +6,9 @@ on:
     types:
       - opened # 시점 문제로 open시에만 트리거한다.
 
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 permissions:
   contents: write
   pull-requests: write
